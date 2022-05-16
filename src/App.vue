@@ -3,10 +3,20 @@
     <nav class="navbar">
       <img class="navbar__logo" alt="simple books logo"  src="/logos/simplebks-logo.png"/>
     </nav>
-    <router-view />
+    <router-view @changeShowLoaderStatus="changeShowLoaderStatus" />
+    <BaseLoader :showLoader="showLoader" />
     <notifications />
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+const showLoader = ref(false)
+const changeShowLoaderStatus = (val) => {
+  showLoader.value = val
+}
+</script>
 
 <style lang="scss">
 *,
@@ -29,7 +39,7 @@ body {
   background: $color-secondary;
   padding: 1.5rem 2rem;
   &__logo {
-    width:  13%;
+    width:  10%;
     height: auto;
   }
 }

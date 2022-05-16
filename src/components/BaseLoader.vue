@@ -42,7 +42,7 @@ export default {
   left: 50%;
   transform: translate(-50% -50%);
   border-radius: 50%;
-  border-top: 16px solid $color-primary;
+  border-top: 16px solid $light-grey-2;
   width: 7rem;
   height: 7rem;
   -webkit-animation: spin 2s linear infinite; /* Safari */

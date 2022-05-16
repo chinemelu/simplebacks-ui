@@ -37,10 +37,20 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(new Error('Not found'))
     }
     if (error.config && error.response && error.response.status === 401) {
-      store.dispatch('CLEAR_USER_DATA')
+      return store.commit('CLEAR_USER_DATA')
     }
     return Promise.reject(errorHandler(error))
   }
 )
+
+axiosInstance.interceptors.request.use(function (config) {
+  console.log('config', config)
+  if (config.url !== '/auth/login') {
+    const seller = JSON.parse(localStorage.getItem('seller'))
+    const base64Credentials = seller.credentials
+    config.headers.Authorization = base64Credentials ? `Basic ${base64Credentials}` : ''
+  }
+  return config
+})
 
 app.use(Toast).use(router).use(store).mount('#app')

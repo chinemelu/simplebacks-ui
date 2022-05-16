@@ -10,24 +10,24 @@
       <div>
         <BaseButton :disabled="buttonIsDisabled" type="submit" class="login__btn">Login</BaseButton>
       </div>
-      <BaseLoader :showLoader="showLoader" />
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, defineEmits } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 
 const username = ref('')
 const password = ref('')
-const showLoader = ref(false)
 const router = useRouter()
 
 const store = useStore()
 const toast = useToast()
+
+const emit = defineEmits(['changeShowLoaderStatus'])
 
 const handleLogin = async () => {
   const credentials = {
@@ -35,16 +35,15 @@ const handleLogin = async () => {
     password: password.value
   }
   try {
-    showLoader.value = true
+    emit('changeShowLoaderStatus', true)
     const response = await store.dispatch('login', credentials)
-    showLoader.value = false
+    emit('changeShowLoaderStatus', false)
     toast.success('You have successfully logged in')
     store.commit('SET_USER_DATA', response.data)
     router.push({ name: 'OrderList' })
   } catch (err) {
-    showLoader.value = false
-    console.log('error', err)
-    toast.error(err.message)
+    emit('changeShowLoaderStatus', false)
+    toast.error(err)
   }
 }
 

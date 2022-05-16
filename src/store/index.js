@@ -20,11 +20,9 @@ export default createStore({
     }
   },
   actions: {
-    login ({ commit }, credentials) {
-      return post('/auth/login', credentials)
-        .then(({ data }) => {
-          commit('SET_USER_DATA', data)
-        })
+    async login ({ commit }, credentials) {
+      const response = post('/auth/login', credentials)
+      return response
     }
   }
 })

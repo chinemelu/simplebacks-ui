@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/order-list',
     name: 'OrderList',
-    component: () => import(/* webpackChunkName: "about" */ '../pages/Login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../pages/OrderList.vue')
   },
   {
     path: '/user/:id',

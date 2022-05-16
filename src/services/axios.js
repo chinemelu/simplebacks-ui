@@ -1,16 +1,14 @@
 import axiosInstance from '@/api/axios'
 
-export const get = async ({ url }) => {
-  const response = await axiosInstance.get(url)
-  return response
-}
+// export const get = async (url) => {
+//   return axiosInstance.get(url)
+// }
 
-export const post = async ({ url, data }) => {
+export const post = async (url, data) => {
   const response = await axiosInstance.post(url, data)
   return response
 }
 
-export const put = async ({ url, data }) => {
-  const response = await axiosInstance.put(url, data)
-  return response
-}
+// export const patch = async (url, data) => {
+//   return axiosInstance.patch(url, data)
+// }

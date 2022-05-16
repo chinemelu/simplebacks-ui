@@ -6,6 +6,11 @@ import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 import axiosInstance from '@/api/axios'
 import errorHandler from '@/helper/error'
+// import VueLoading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
+import Toast from 'vue-toastification'
+// Import the CSS or use your own!
+import 'vue-toastification/dist/index.css'
 
 const requireComponent = require.context(
   './components',
@@ -28,26 +33,14 @@ requireComponent.keys().forEach((fileName) => {
 axiosInstance.interceptors.response.use(
   (response) => Promise.resolve(response),
   (error) => {
-    if (error.config && error.response && error.response.status >= 500) {
-      let retries = 0
-      const { config } = error
-      const maxRetries = 3
-      while (retries < maxRetries) {
-        try {
-          return new Promise((resolve) => {
-            resolve(axiosInstance(config))
-          })
-        } catch (err) {
-          retries += 1
-        }
-      }
-      return Promise.reject(errorHandler(error))
-    }
     if (error.config && error.response && error.response.status === 404) {
       return Promise.reject(new Error('Not found'))
+    }
+    if (error.config && error.response && error.response.status === 401) {
+      store.dispatch('CLEAR_USER_DATA')
     }
     return Promise.reject(errorHandler(error))
   }
 )
 
-app.use(router).use(store).mount('#app')
+app.use(Toast).use(router).use(store).mount('#app')

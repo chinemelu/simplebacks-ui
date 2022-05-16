@@ -8,7 +8,7 @@
         <BaseInput v-model="password" class="login__input" placeholder="Password" type="password" />
       </div>
       <div>
-        <BaseButton type="submit" class="login__btn">Login</BaseButton>
+        <BaseButton :disabled="buttonIsDisabled" type="submit" class="login__btn">Login</BaseButton>
       </div>
       <BaseLoader :showLoader="showLoader" />
     </form>
@@ -16,9 +16,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 const username = ref('')
 const password = ref('')
@@ -26,6 +27,7 @@ const showLoader = ref(false)
 const router = useRouter()
 
 const store = useStore()
+const toast = useToast()
 
 const handleLogin = async () => {
   const credentials = {
@@ -34,13 +36,21 @@ const handleLogin = async () => {
   }
   try {
     showLoader.value = true
-    await store.dispatch('login', credentials)
+    const response = await store.dispatch('login', credentials)
     showLoader.value = false
+    toast.success('You have successfully logged in')
+    store.commit('SET_USER_DATA', response.data)
     router.push({ name: 'OrderList' })
   } catch (err) {
     showLoader.value = false
+    console.log('error', err)
+    toast.error(err.message)
   }
 }
+
+const buttonIsDisabled = computed(() => {
+  return !username.value.length || !password.value.length
+})
 </script>
 
 <style lang="scss" scoped>

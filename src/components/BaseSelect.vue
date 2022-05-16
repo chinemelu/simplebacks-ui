@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import UniqueID from '../features/UniqueID.js'
 export default {
   props: {
     defaultSelectText: {
@@ -37,8 +36,7 @@ export default {
       emit('update:modelValue', event.target.value)
     }
 
-    const uuid = UniqueID().getID()
-    return { handleChange, uuid }
+    return { handleChange }
   }
 }
 </script>

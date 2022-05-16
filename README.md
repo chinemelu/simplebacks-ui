@@ -1,4 +1,4 @@
-# simplebacks-ui
+# simplebks-ui
 
 ## Project setup
 ```

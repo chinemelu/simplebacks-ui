@@ -23,24 +23,24 @@ import { useRouter } from 'vue-router'
 const username = ref('')
 const password = ref('')
 const showLoader = ref(false)
-// const router = useRouter()
+const router = useRouter()
 
-// const store = useStore()
+const store = useStore()
 
-// const handleLogin = async () => {
-//   const credentials = {
-//     username: username.value,
-//     password: password.value
-//   }
-//   try {
-//     showLoader.value = true
-//     await store.dispatch('login', credentials)
-//     showLoader.value = false
-//     router.push({ name: 'OrderList' })
-//   } catch (err) {
-//     showLoader.value = false
-//   }
-// }
+const handleLogin = async () => {
+  const credentials = {
+    username: username.value,
+    password: password.value
+  }
+  try {
+    showLoader.value = true
+    await store.dispatch('login', credentials)
+    showLoader.value = false
+    router.push({ name: 'OrderList' })
+  } catch (err) {
+    showLoader.value = false
+  }
+}
 </script>
 
 <style lang="scss" scoped>

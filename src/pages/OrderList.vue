@@ -12,10 +12,42 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { onMounted, ref } from 'vue'
 import { get } from '@/services/axios'
 
+export default {
+  setup (props, { emit }) {
+    const posts = ref([])
+
+    const editPost = (post) => {
+      const detailsOfPostToEdit = {
+        id: post.id,
+        title: post.title,
+        body: post.body
+      }
+      emit('editPost', detailsOfPostToEdit)
+    }
+    const fetchPosts = async () => {
+      try {
+        emit('changeShowLoaderStatus', true)
+        const response = await get({ url: '/posts' })
+        emit('changeShowLoaderStatus', false)
+        posts.value = response.data
+      } catch (err) {
+        emit('changeShowLoaderStatus', false)
+        alert(err)
+      }
+    }
+    onMounted(async () => {
+      await fetchPosts()
+    })
+    return {
+      posts,
+      editPost
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

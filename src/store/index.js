@@ -3,7 +3,8 @@ import { post, get } from '@/services/axios'
 
 export default createStore({
   state: {
-    seller: null
+    seller: null,
+    isAuthenticated: false
   },
   mutations: {
     CLEAR_USER_DATA () {
@@ -13,11 +14,14 @@ export default createStore({
     SET_USER_DATA (state, sellerData) {
       state.seller = sellerData
       localStorage.setItem('seller', JSON.stringify(sellerData))
+    },
+    SET_ISAUTHENTICATED (state, val) {
+      state.isAuthenticated = val
     }
   },
   actions: {
-    async login ({ commit }, credentials) {
-      const response = post('/auth/login', credentials)
+    async login (_, credentials) {
+      const response = await post('/auth/login', credentials)
       return response
     },
     async fetchOrderItems (_, { sort, order, offset, limit }) {

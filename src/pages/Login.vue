@@ -40,6 +40,7 @@ const handleLogin = async () => {
     emit('changeShowLoaderStatus', false)
     toast.success('You have successfully logged in')
     store.commit('SET_USER_DATA', response.data)
+    store.commit('SET_ISAUTHENTICATED', true)
     router.push({ name: 'OrderList' })
   } catch (err) {
     emit('changeShowLoaderStatus', false)

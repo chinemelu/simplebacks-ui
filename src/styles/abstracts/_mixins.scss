@@ -13,6 +13,12 @@
   justify-content: space-between;
 }
 
+@mixin flex-justify-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @mixin flex-justify-center {
   display: flex;
   justify-content: center;

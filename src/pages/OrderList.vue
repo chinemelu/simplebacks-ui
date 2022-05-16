@@ -2,7 +2,7 @@
   <div class="get-post mt-md">
     <div class="get-post__post-container mb-md" v-for="orderItem in orderItems" :key="orderItem.id">
       <p><span class="text-bold mr-xs">Order Id:</span> {{ orderItem.id }}</p>
-      <p class="mt-sm"><span class="text-bold mr-xs truncate">Product Id:</span> {{ orderItem.product_id  }}</p>
+      <p class="mt-sm"><span class="text-bold mr-xs">Product Id:</span> {{ orderItem.product_id  }}</p>
       <p class="mt-sm"><span class="text-bold mr-xs">Product Category:</span> {{ orderItem.product_category  }}</p>
       <p class="mt-sm"><span class="text-bold mr-xs">Price:</span>${{ orderItem.price  }}</p>
       <p class="mt-sm"><span class="text-bold mr-xs">Shipping limit date:</span>
@@ -59,9 +59,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.truncate {
-  text-overflow: ellipsis;
-}
 .get-post {
   max-width: 95%;
   padding: 2rem 1rem;

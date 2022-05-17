@@ -10,6 +10,7 @@ export const post = async (url, data) => {
   return response
 }
 
-// export const patch = async (url, data) => {
-//   return axiosInstance.patch(url, data)
-// }
+export const axiosDelete = async (url) => {
+  const response = await axiosInstance.delete(url)
+  return response
+}

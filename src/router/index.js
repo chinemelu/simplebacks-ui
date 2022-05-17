@@ -15,7 +15,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../pages/OrderList.vue')
   },
   {
-    path: '/user/:id',
+    path: '/edit/:id',
+    name: 'EditOrderItem',
+    meta: {
+      requiresAuth: true
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../pages/EditOrderItem.vue')
+  },
+  {
+    path: '/orderItem/:id',
     name: 'SinglePage',
     meta: {
       requiresAuth: true

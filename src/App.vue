@@ -1,10 +1,19 @@
 <template>
   <div>
     <nav class="navbar">
-      <img class="navbar__logo" alt="simple books logo"  src="/logos/simplebks-logo.png"/>
+      <img class="navbar__logo" alt="simple books logo"
+        src="/logos/simplebks-logo.png"
+        @click="$router.push({ name: 'OrderList'})"
+      />
       <span v-if="isAuthenticated" class="navbar__logout-link" @click="handleLogout">logout</span>
     </nav>
-    <router-view @changeShowLoaderStatus="changeShowLoaderStatus" />
+    <router-view v-slot="{ Component }" @changeShowLoaderStatus="changeShowLoaderStatus">
+      <transition
+        name="fade"
+      >
+        <component :is="Component" />
+      </transition>
+    </router-view>
     <BaseLoader :showLoader="showLoader" />
   </div>
 </template>
@@ -45,4 +54,13 @@ const handleLogout = () => {
   }
 }
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

@@ -37,4 +37,31 @@ export default {
   border-radius: 8px;
   margin-top: 3rem;
 }
+
+.single-page__delete-btn {
+  padding: 1.5rem 1.5rem;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  background-color: red;
+  color: $primary-white;
+}
+
+.single-page__edit-btn {
+  padding: 1.5rem 1.5rem;
+  font-size: 1.6rem;
+  border-radius: 8px;
+  background-color: $color-primary;
+  color: $primary-white;
+}
+
+.edit-resource__btn {
+  width: 50%;
+  padding: 1.5rem;
+  background-color: $color-primary;
+  color: $primary-white;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
 </style>

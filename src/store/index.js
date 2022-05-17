@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { post, get } from '@/services/axios'
+import { post, get, axiosDelete } from '@/services/axios'
 
 export default createStore({
   state: {
@@ -9,7 +9,7 @@ export default createStore({
   mutations: {
     CLEAR_USER_DATA () {
       localStorage.clear()
-      // location.reload()
+      location.reload()
     },
     SET_USER_DATA (state, sellerData) {
       state.seller = sellerData
@@ -26,6 +26,10 @@ export default createStore({
     },
     async fetchOrderItems (_, { sort, order, offset, limit }) {
       const response = get(`/order_items?sort=${sort}&order=${order}&offset=${offset}&limit=${limit}`)
+      return response
+    },
+    async deleteOrderItem (_, id) {
+      const response = axiosDelete(`/order_items/${id}`)
       return response
     }
   }

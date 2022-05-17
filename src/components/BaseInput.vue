@@ -32,14 +32,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login__input {
+.login__input, .edit-resource__input{
   font-size: 1.6rem;
   padding: 2rem 1.5rem;
   border-radius: $border-radius-sm;
   border: 1px solid $light-grey-1;
   width: 100%;
+}
+
+.login__input {
   &:nth-child(1) {
     margin-top: 1.5rem;
   }
+}
+
+.edit-resource__input {
+  margin-bottom: 2rem;
 }
 </style>
